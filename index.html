@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriconnect Platform - Smart Farming, Simplified</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2ECC71;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2ECC71;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(231, 126, 34, 0.1)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="%232ECC71" opacity="0.1"/></pattern></defs><rect width="1200" height="600" fill="url(%23pattern)"/></svg>');
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            color: white;
+        }
+
+        .hero-btn.secondary {
+            background: white;
+            color: #2ECC71;
+            border: 2px solid #2ECC71;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #2ECC71;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #2ECC71;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ===== AI RECOMMENDATION SECTION ===== */
+        .ai-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            color: white;
+        }
+
+        .ai-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .ai-section .section-title {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .ai-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #2ECC71;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #E67E22, #D35400);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(230, 126, 34, 0.3);
+        }
+
+        .ai-result {
+            background: white;
+            color: #333;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .ai-result h3 {
+            color: #2ECC71;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .ai-result .crop-recommendation {
+            margin-bottom: 1rem;
+        }
+
+        .ai-result .crop-recommendation strong {
+            color: #E67E22;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .services-search {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+
+        .filter-btn {
+            background: white;
+            color: #2ECC71;
+            border: 2px solid #2ECC71;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #2ECC71;
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 200px;
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .service-info {
+            padding: 1.5rem;
+        }
+
+        .service-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-rating {
+            color: #E67E22;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-btn {
+            background: linear-gradient(135deg, #E67E22, #D35400);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2ECC71;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #2ECC71;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #2ECC71;
+            color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #999;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .feature-card,
+            .ai-form {
+                padding: 1.5rem;
+            }
+        }
+
+        /* ===== LOADING ANIMATION ===== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== NAVIGATION BAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#home" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    Agriconnect
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#crop-ai">Crop AI</a></li>
+                    <li><a href="#hire-services">Hire Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="cta-btn">Login / Register</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Smart Farming, Simplified</h1>
+                <p>Get AI-powered crop advice and hire farm services on-demand. Everything you need, all in one place.</p>
+                <div class="hero-buttons">
+                    <a href="#crop-ai" class="hero-btn primary">
+                        <i class="fas fa-brain"></i>
+                        Get Crop Recommendation
+                    </a>
+                    <a href="#hire-services" class="hero-btn secondary">
+                        <i class="fas fa-search"></i>
+                        Find Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Our Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Crop Recommendation</h3>
+                    <p>Data-driven advice to maximize your yield using advanced machine learning algorithms and local weather patterns.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>On-Demand Hiring</h3>
+                    <p>Instantly hire skilled workers, tractors, and agricultural machinery whenever you need them, at competitive rates.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Market Price Alerts</h3>
+                    <p>Get real-time mandi prices for your crops and make informed decisions about when to sell for maximum profit.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Government Schemes</h3>
+                    <p>Easily find and apply for relevant subsidies, loans, and government programs designed to support farmers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Group Booking</h3>
+                    <p>Save money by booking services with your village community and benefit from bulk pricing discounts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Carbon Credits</h3>
+                    <p>Earn rewards for sustainable farming practices and contribute to environmental conservation efforts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI CROP RECOMMENDATION SECTION ===== -->
+    <section id="crop-ai" class="ai-section">
+        <div class="container">
+            <div class="ai-container">
+                <h2 class="section-title">Get Your AI-Powered Crop Recommendation</h2>
+                <div class="ai-form">
+                    <form id="cropForm">
+                        <div class="form-group">
+                            <label for="state">Select Your State</label>
+                            <select id="state" name="state" required>
+                                <option value="">Choose your state</option>
+                                <option value="maharashtra">Maharashtra</option>
+                                <option value="punjab">Punjab</option>
+                                <option value="uttar-pradesh">Uttar Pradesh</option>
+                                <option value="haryana">Haryana</option>
+                                <option value="rajasthan">Rajasthan</option>
+                                <option value="madhya-pradesh">Madhya Pradesh</option>
+                                <option value="gujarat">Gujarat</option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="andhra-pradesh">Andhra Pradesh</option>
+                                <option value="tamil-nadu">Tamil Nadu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="soil">Select Soil Type</label>
+                            <select id="soil" name="soil" required>
+                                <option value="">Choose your soil type</option>
+                                <option value="alluvial">Alluvial Soil</option>
+                                <option value="black">Black Cotton Soil</option>
+                                <option value="red">Red Soil</option>
+                                <option value="laterite">Laterite Soil</option>
+                                <option value="sandy">Sandy Soil</option>
+                                <option value="clayey">Clayey Soil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="water">Water Availability (in mm)</label>
+                            <input type="number" id="water" name="water" placeholder="Enter annual rainfall/irrigation in mm" required>
+                        </div>
+                        <button type="submit" class="analyze-btn" id="analyzeBtn">
+                            <i class="fas fa-cog"></i>
+                            Analyze & Recommend
+                        </button>
+                    </form>
+                </div>
+                <div id="aiResult" class="ai-result">
+                    <h3 id="resultTitle">Recommendation Results</h3>
+                    <div id="resultContent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ON-DEMAND SERVICES SECTION ===== -->
+    <section id="hire-services" class="services">
+        <div class="container">
+            <h2 class="section-title">Hire Farm Services Near You</h2>
+            <div class="services-search">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search for services in your area...">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="workers">Workers</button>
+                    <button class="filter-btn" data-filter="machinery">Machinery</button>
+                </div>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Service cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Agriconnect</h3>
+                    <p>Empowering farmers with smart technology solutions for sustainable and profitable agriculture. Join thousands of farmers already benefiting from our platform.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#crop-ai">Crop AI</a></p>
+                    <p><a href="#hire-services">Hire Services</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra, India</p>
+                    <p><i class="fas fa-envelope"></i> info@agriconnect.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Agriconnect Platform. All rights reserved. | Smart India Hackathon 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SMOOTH SCROLLING FOR NAVIGATION LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ===== AI CROP RECOMMENDATION LOGIC =====
+        const cropRecommendations = {
+            'maharashtra-black': {
+                primary: 'Cotton',
+                secondary: 'Soybean',
+                tip: 'Ensure proper irrigation during the post-monsoon season.'
+            },
+            'punjab-alluvial': {
+                primary: 'Wheat',
+                secondary: 'Rice',
+                tip: 'Monitor for pest control during harvest season.'
+            },
+            'uttar-pradesh-alluvial': {
+                primary: 'Sugarcane',
+                secondary: 'Wheat',
+                tip: 'Maintain proper drainage to prevent waterlogging.'
+            },
+            'haryana-alluvial': {
+                primary: 'Wheat',
+                secondary: 'Mustard',
+                tip: 'Use certified seeds for better yield.'
+            },
+            'rajasthan-sandy': {
+                primary: 'Pearl Millet',
+                secondary: 'Gram',
+                tip: 'Implement drip irrigation for water conservation.'
+            },
+            'default': {
+                primary: 'Mixed Vegetables',
+                secondary: 'Pulses',
+                tip: 'Consult local agricultural experts for region-specific advice.'
+            }
+        };
+
+        document.getElementById('cropForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const state = document.getElementById('state').value;
+            const soil = document.getElementById('soil').value;
+            const water = document.getElementById('water').value;
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const resultDiv = document.getElementById('aiResult');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultContent = document.getElementById('resultContent');
+
+            if (!state || !soil || !water) {
+                alert('Please fill in all fields to get recommendations.');
+                return;
+            }
+
+            // Show loading state
+            analyzeBtn.innerHTML = '<span class="loading"></span>Analyzing...';
+            analyzeBtn.disabled = true;
+
+            // Simulate AI processing delay
+            setTimeout(() => {
+                const key = '${state}-${soil}';
+                const recommendation = cropRecommendations[key] || cropRecommendations['default'];
+                
+                resultTitle.textContent = 'Recommendation for ${state.charAt(0).toUpperCase() + state.slice(1)} with ${soil.charAt(0).toUpperCase() + soil.slice(1)} Soil:';
+                
+                resultContent.innerHTML = `
+                    <div class="crop-recommendation">
+                        <strong>🌾 Top Crop:</strong> ${recommendation.primary} (High Profitability)
+                    </div>
+                    <div class="crop-recommendation">
+                        <strong>🌱 Alternative:</strong> ${recommendation.secondary} (Good Resilience)
+                    </div>
+                    <div class="crop-recommendation">
+                        <strong>💡 Expert Tip:</strong> ${recommendation.tip}
+                    </div>
+                    <div class="crop-recommendation">
+                        <strong>💧 Water Analysis:</strong> ${water}mm ${water > 800 ? '(Sufficient for high-yield crops)' : '(Consider drought-resistant varieties)'}
+                    </div>
+                `;
+                
+                resultDiv.style.display = 'block';
+                
+                // Reset button
+                analyzeBtn.innerHTML = '<i class="fas fa-cog"></i> Analyze & Recommend';
+                analyzeBtn.disabled = false;
+                
+                // Scroll to result
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        });
+
+        // ===== ON-DEMAND SERVICES LOGIC =====
+        const serviceProviders = [
+            {
+                id: 1,
+                name: "Ramesh Kumar - Tractor Service",
+                type: "machinery",
+                rating: 4.5,
+                location: "Pune District",
+                icon: "fas fa-tractor",
+                price: "₹500/hour"
+            },
+            {
+                id: 2,
+                name: "Suresh Singh - Farm Workers",
+                type: "workers",
+                rating: 4.8,
+                location: "Mumbai District",
+                icon: "fas fa-users",
+                price: "₹300/day"
+            },
+            {
+                id: 3,
+                name: "Modern Agri Equipment",
+                type: "machinery",
+                rating: 4.3,
+                location: "Nashik District",
+                icon: "fas fa-cogs",
+                price: "₹800/hour"
+            },
+            {
+                id: 4,
+                name: "Krishna Agricultural Services",
+                type: "workers",
+                rating: 4.7,
+                location: "Aurangabad District",
+                icon: "fas fa-seedling",
+                price: "₹250/day"
+            },
+            {
+                id: 5,
+                name: "Harvester Solutions",
+                type: "machinery",
+                rating: 4.6,
+                location: "Solapur District",
+                icon: "fas fa-cut",
+                price: "₹1200/hour"
+            },
+            {
+                id: 6,
+                name: "Village Labour Cooperative",
+                type: "workers",
+                rating: 4.4,
+                location: "Kolhapur District",
+                icon: "fas fa-handshake",
+                price: "₹280/day"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function renderServices(filter = 'all') {
+            const servicesGrid = document.getElementById('servicesGrid');
+            const filteredServices = filter === 'all' ? serviceProviders : 
+                serviceProviders.filter(service => service.type === filter);
+
+            servicesGrid.innerHTML = filteredServices.map(service => `
+                <div class="service-card" data-type="${service.type}">
+                    <div class="service-image">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>${service.name}</h3>
+                        <div class="service-rating">
+                            ${'★'.repeat(Math.floor(service.rating))} ${service.rating}/5.0
+                        </div>
+                        <div class="service-location">
+                            <i class="fas fa-map-marker-alt"></i> ${service.location}
+                        </div>
+                        <div class="service-price" style="color: #2ECC71; font-weight: 600; margin-bottom: 1rem;">
+                            ${service.price}
+                        </div>
+                        <button class="book-btn" onclick="bookService('${service.name}', ${service.id})">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function bookService(serviceName, serviceId) {
+            // Show booking confirmation
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                z-index: 10000;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+            `;
+            
+            confirmation.innerHTML = `
+                <div style="color: #2ECC71; font-size: 3rem; margin-bottom: 1rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="color: #333; margin-bottom: 1rem;">Booking Confirmed!</h3>
+                <p style="color: #666; margin-bottom: 1.5rem;">
+                    Your booking request has been sent to <strong>${serviceName}</strong>. 
+                    They will contact you within 15 minutes.
+                </p>
+                <button onclick="this.parentElement.remove()" style="
+                    background: #2ECC71; 
+                    color: white; 
+                    border: none; 
+                    padding: 0.8rem 2rem; 
+                    border-radius: 50px; 
+                    cursor: pointer;
+                    font-weight: 600;
+                ">
+                    Got it!
+                </button>
+            `;
+
+            document.body.appendChild(confirmation);
+
+            // Remove after 5 seconds if not manually closed
+            setTimeout(() => {
+                if (confirmation.parentElement) {
+                    confirmation.remove();
+                }
+            }, 5000);
+        }
+
+        // Initialize services grid
+        renderServices();
+
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter value and render services
+                const filter = this.getAttribute('data-filter');
+                currentFilter = filter;
+                renderServices(filter);
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                const serviceName = card.querySelector('h3').textContent.toLowerCase();
+                const serviceLocation = card.querySelector('.service-location').textContent.toLowerCase();
+                
+                if (serviceName.includes(searchTerm) || serviceLocation.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // ===== MOBILE MENU FUNCTIONALITY =====
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        });
+
+        // ===== NAVBAR SCROLL EFFECT =====
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.backdropFilter = 'blur(15px)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and service cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card, .service-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // ===== LOADING SCREEN SIMULATION =====
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // ===== FORM VALIDATION ENHANCEMENTS =====
+        const formInputs = document.querySelectorAll('input, select');
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.checkValidity()) {
+                    this.style.borderColor = '#2ECC71';
+                } else {
+                    this.style.borderColor = '#e74c3c';
+                }
+            });
+
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#e0e0e0';
+            });
+        });
+
+        // ===== PERFORMANCE OPTIMIZATION =====
+        // Lazy loading for images (if any were added)
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // ===== ACCESSIBILITY ENHANCEMENTS =====
+        // Keyboard navigation for buttons
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.classList.contains('book-btn') || 
+                    focusedElement.classList.contains('filter-btn') ||
+                    focusedElement.classList.contains('analyze-btn')) {
+                    e.preventDefault();
+                    focusedElement.click();
+                }
+            }
+        });
+
+        // ===== EASTER EGG - KONAMI CODE =====
+        let konamiCode = [];
+        const konami = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konami.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konami)) {
+                // Easter egg activated!
+                document.body.style.transform = 'rotate(1deg)';
+                setTimeout(() => {
+                    document.body.style.transform = 'rotate(0deg)';
+                }, 2000);
+                
+                // Show special message
+                const easter = document.createElement('div');
+                easter.innerHTML = '🎉 You found the Easter egg! Happy farming! 🚜';
+                easter.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #2ECC71, #27AE60);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 10px;
+                    z-index: 10000;
+                    animation: fadeIn 0.5s ease;
+                `;
+                document.body.appendChild(easter);
+                
+                setTimeout(() => easter.remove(), 3000);
+                konamiCode = [];
+            }
+        });
+
+        console.log('🌾 Agriconnect Platform loaded successfully!');
+        console.log('💡 Try the Konami Code for a surprise! ↑↑↓↓←→←→BA');
+    </script>
+</body>
+</html>
